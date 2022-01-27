@@ -1,3 +1,10 @@
-from django.shortcuts import render
+from django.core import serializers
+from django.http import HttpResponse
 
-# Create your views here.
+from .models import Transmission
+
+
+def index(request):
+    items = Transmission.objects.all()
+    data = serializers.serialize('json', items)
+    return HttpResponse(data, content_type='application/json')
