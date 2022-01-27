@@ -15,6 +15,8 @@ from pathlib import Path
 
 APP_BACKOFF_PERIOD = os.getenv('APP_BACKOFF_PERIOD', '0.2')
 APP_ENTSOE_API_KEY = os.getenv('APP_ENTSOE_API_KEY', '')
+APP_SCRAPER_WINDOW_HOURS = os.getenv('APP_SCRAPER_WINDOW_HOURS', '3')
+APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN = os.getenv('APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN', '24')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

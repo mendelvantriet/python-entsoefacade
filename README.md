@@ -21,3 +21,9 @@ python manage.py migrate
 ```bash
 python manage.py test
 ```
+
+## Run
+
+```bash
+python manage.py runserver
+```

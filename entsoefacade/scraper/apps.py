@@ -1,4 +1,6 @@
 from django.apps import AppConfig
+from entsoefacade.scraper.scrapers import scrape_all
+from entsoefacade import settings
 
 
 class ScraperConfig(AppConfig):
@@ -6,4 +8,4 @@ class ScraperConfig(AppConfig):
     name = 'entsoefacade.scraper'
 
     def ready(self):
-        pass
+        df = scrape_all(int(settings.APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN))

@@ -9,6 +9,13 @@ country_connections = {
 }
 
 
+def scrape_all(window_hours):
+    end = pd.Timestamp.now()
+    start = end - pd.Timedelta(hours=window_hours)
+    ts = TransmissionScraper()
+    return ts.all_cross_border_flows(start, end)
+
+
 class TransmissionScraper:
 
     def __init__(self):
