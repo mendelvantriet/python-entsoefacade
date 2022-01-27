@@ -15,3 +15,9 @@ cd ..
 python manage.py makemigrations transmission
 python manage.py migrate
 ```
+
+## Test
+
+```bash
+python manage.py test
+```

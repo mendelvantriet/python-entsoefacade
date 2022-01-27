@@ -1,3 +1,5 @@
+entsoe-py
 django
 djangorestframework
 markdown
+pandas
