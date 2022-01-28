@@ -11,8 +11,9 @@ class ScraperConfig(AppConfig):
 
     def ready(self):
         if os.environ.get('RUN_MAIN'):
-            print("SCRAPING...")
-            df = scrape_all(int(settings.APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN))
-            print("SCRAPING FINISHED!")
-            persist(df)
-            print("DATA PERSISTED!")
+            if settings.APP_SCRAPER_RUN_ON_START:
+                print("SCRAPING...")
+                df = scrape_all(int(settings.APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN))
+                print("SCRAPING FINISHED!")
+                persist(df)
+                print("DATA PERSISTED!")
