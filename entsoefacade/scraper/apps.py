@@ -1,6 +1,8 @@
 from django.apps import AppConfig
-from entsoefacade.scraper.scrapers import scrape_all
+import os
 from entsoefacade import settings
+from .helpers import persist
+from .scrapers import scrape_all
 
 
 class ScraperConfig(AppConfig):
@@ -8,4 +10,9 @@ class ScraperConfig(AppConfig):
     name = 'entsoefacade.scraper'
 
     def ready(self):
-        df = scrape_all(int(settings.APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN))
+        if os.environ.get('RUN_MAIN'):
+            print("SCRAPING...")
+            df = scrape_all(int(settings.APP_SCRAPER_WINDOW_HOURS_ON_FIRST_RUN))
+            print("SCRAPING FINISHED!")
+            persist(df)
+            print("DATA PERSISTED!")
