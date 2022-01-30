@@ -20,5 +20,6 @@ from .transmission import views
 
 urlpatterns = [
     path('v1/transmissions/', views.index),
+    path('v1/transmissions/cross_border_flows/', views.search),
     path('admin/', admin.site.urls),
 ]
