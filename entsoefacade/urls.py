@@ -19,7 +19,7 @@ from django.urls import path
 from .transmission import views
 
 urlpatterns = [
-    path('v1/transmissions/', views.index),
-    path('v1/transmissions/cross_border_flows/', views.search),
+    path('transmissions/', views.index),
     path('admin/', admin.site.urls),
+    path('v1/transmissions/cross_border_flows/', views.search),
 ]

@@ -1,18 +1,28 @@
 import json
 from datetime import datetime
 
-from django.core import serializers
+from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.db.models.functions import Trunc
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse
+from django.shortcuts import render
 
 from .models import Transmission
+
+per_page = 25
 
 
 def index(request):
     items = Transmission.objects.all()
-    data = serializers.serialize('json', items)
-    return JsonResponse(data, safe=False)
+
+    paginator = Paginator(items, per_page)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+    }
+    return render(request, 'index.html', context=context)
 
 
 def search(request):
