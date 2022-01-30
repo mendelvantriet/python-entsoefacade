@@ -1,3 +1,4 @@
+import sys
 import time
 
 import pandas as pd
@@ -36,13 +37,16 @@ class TransmissionScraper:
         return pd.concat(dfs, ignore_index=True)
 
     def cross_border_flows(self, country_code_from, country_code_to, start, end):
-        s = self.client.query_crossborder_flows(country_code_from, country_code_to, start=start, end=end)
-        s.name = 'capacity'
-        s.index.name = 'timestamp'
-        s.index = s.index.tz_convert(tz)
-        df = s.to_frame()
-        df.reset_index(inplace=True)
-        df.insert(loc=0, column="country_code_from", value=country_code_from)
-        df.insert(loc=1, column="country_code_to", value=country_code_to)
-        time.sleep(float(settings.APP_BACKOFF_PERIOD))  # Do not stress the api
-        return df
+        try:
+            s = self.client.query_crossborder_flows(country_code_from, country_code_to, start=start, end=end)
+            s.name = 'capacity'
+            s.index.name = 'timestamp'
+            s.index = s.index.tz_convert(tz)
+            df = s.to_frame()
+            df.reset_index(inplace=True)
+            df.insert(loc=0, column="country_code_from", value=country_code_from)
+            df.insert(loc=1, column="country_code_to", value=country_code_to)
+            time.sleep(float(settings.APP_BACKOFF_PERIOD))  # Do not stress the api
+            return df
+        except Exception as e:
+            print(e, file=sys.stderr)

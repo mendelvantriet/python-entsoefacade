@@ -1,5 +1,6 @@
-entsoe-py
-django
-djangorestframework
+apscheduler
+entsoe-py~=0.4.2
+django~=4.0.1
+djangorestframework~=3.13.1
 markdown
 pandas
